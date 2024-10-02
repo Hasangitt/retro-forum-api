@@ -1,7 +1,7 @@
 // load discuss card data from api
 
-const loadDiscussData = async () => {
-    const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
+const loadDiscussData = async (categoryName) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`);
     const data = await res.json();
     const posts = data.posts;
    showDisplay(posts);
@@ -11,33 +11,37 @@ const loadDiscussData = async () => {
 const showDisplay = (posts) => {
     console.log(posts);
     const getPostContainer = document.getElementById('discuss-container');
+    getPostContainer.textContent = " "
     console.log(getPostContainer);
+   
     
+
+    // looping each post in a container
     posts.forEach(post => {
         console.log(post);
         const createPostCard = document.createElement('div');
         createPostCard.innerHTML = `<div class="w-[770px] h-[270px] gap-5 rounded-lg bg-[#797DFC1A] p-8">
                 <div class="flex gap-5">
                     <div class="w-[72px] h-[72px]">
-                        <img class="rounded-md" src="https://i.ibb.co/0QRxkd5/pexels-jan-kop-iva-3525908.jpg" alt="">
+                        <img class="rounded-md" src="${post.image}" alt="">
                     </div>
                     <div class="space-y-4">
                         <div class="flex gap-5">
-                            <div><p id="category"># Music</p></div>
-                            <div><p id="author-name">Author: Hasan Ali</p></div>
+                            <div><p id="category">${post.category}</p></div>
+                            <div><p id="author-name">${post.author.name}</p></div>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-semibold">10 Kids Unaware of Their Halloween Costume</h3>
-                            <p class="text-gray-500">It’s one thing to subject yourself to ha Halloween costume mishap because, hey that’s your prerogative</p>
+                            <h3 class="text-2xl font-semibold mb-2">${post.title}</h3>
+                            <p class="text-gray-500">${post.description}</p>
                         </div>
-                       <div class="flex justify-between">
-                            <div class="flex gap-5">
-                                <p><i class="fa fa-comments" aria-hidden="true"></i><span id="Comment">Comment</span></p>
-                                <p><i class="fa fa-user" aria-hidden="true"></i><span id="user-watch">watch</span></p>
-                                <p><i class="fa fa-clock" aria-hidden="true"></i><span id="duration">Time</span></p>
+                       <div class="flex">
+                            <div class="flex gap-5 w-[600px]">
+                                <p><i class="fa fa-comments mr-2" aria-hidden="true"></i><span id="Comment">${post.comment_count}</span></p>
+                                <p><i class="fa fa-user mr-2" aria-hidden="true"></i><span id="user-watch">${post.view_count}</span></p>
+                                <p><i class="fa fa-clock mr-2" aria-hidden="true"></i><span id="duration">${post.posted_time}</span></p>
                             </div>
                             <div>
-                                <button id="message-btn"><i class="fa fa-message" aria-hidden="true"></i></button>
+                                <button onclick ="loadShowId()" id="message-btn"><i class="fa fa-message" aria-hidden="true"></i></button>
                             </div>
                        </div>
                     </div>
@@ -49,6 +53,42 @@ const showDisplay = (posts) => {
 
 };
 
+// get search field text
+
+const searchFieldLoad = () => {
+    const searchFieldElemnt = document.getElementById('input-field');
+    const searchText = searchFieldElemnt.value;
+    console.log(searchText);
+    loadDiscussData(searchText);
+}
 
 
-loadDiscussData();
+// // create a post id function for showing it another section
+
+const loadShowId = async (id) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?id=${id}`);
+    const data = await res.json();
+    const post = data.posts;
+    showContainer(post);
+}
+
+// // create a show container
+const showContainer = (post) => {
+    console.log(post);
+    const getShowContainer = document.getElementById('show-container');
+    console.log(getShowContainer);
+    const createShowContainer = document.createElement('div');
+    createShowContainer.innerHTML = `<div class="flex justify-between bg-white rounded-lg p-5">
+                        <p class="w-[260px]">${post.category}</p>
+                        <p><i class="fa fa-user mr-2" aria-hidden="true"></i><span id="user-view"></span></p>
+                     </div>`
+                     
+    getShowContainer.appendChild(createShowContainer);
+   
+}
+
+
+
+
+
+

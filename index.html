@@ -10,39 +10,38 @@
 </head>
 <body>
     <header>
-        <h1 class="text-4xl text-center text-lightblue my-5">Retro Forum API Projects</h1>
+        <section>
+            <h1 class="text-4xl text-center text-lightblue my-5">Retro Forum API Projects</h1>
+            <div class="mb-10 flex flex-cols justify-center items-center">
+                <input id="input-field" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                <button onclick="searchFieldLoad()" class="btn btn-accent">Accent</button>
+            </div>
+        </section>
+       
     </header>
     <main>
-        <div id="discuss-container" class="grid grid-cols-1 space-y-5">
-           <!-- first post card -->
-            <!-- <div class=" w-[770px] h-[270px] gap-5 rounded-lg bg-[#797DFC1A] p-8">
-                <div class="flex gap-5">
-                    <div class="w-[72px] h-[72px]">
-                        <img class="rounded-md" src="https://i.ibb.co/0QRxkd5/pexels-jan-kop-iva-3525908.jpg" alt="">
+        <section class="flex justify-between items-stretch">
+            <section>
+                <div id="discuss-container" class="grid grid-cols-1 space-y-5 w-[770px]">
+                    <!-- first post card -->
+                 
+                 </div>
+            </section>
+            <section>
+                <div tabindex="0" class="collapse collapse-open border-base-300 bg-base-200 border w-[450px] h-auto p-4 rounded-lg">
+                    <div class="flex justify-between">
+                        <p>Title</p>
+                        <p>Mark as read <span id="read-count">(4)</span></p>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex gap-5">
-                            <div><p id="category"># Music</p></div>
-                            <div><p id="author-name">Author: Hasan Ali</p></div>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-semibold">10 Kids Unaware of Their Halloween Costume</h3>
-                            <p class="text-gray-500">It’s one thing to subject yourself to ha Halloween costume mishap because, hey that’s your prerogative</p>
-                        </div>
-                       <div class="flex justify-between">
-                            <div class="flex gap-5">
-                                <p><i class="fa fa-comments" aria-hidden="true"></i><span id="Comment">Comment</span></p>
-                                <p><i class="fa fa-user" aria-hidden="true"></i><span id="user-watch">watch</span></p>
-                                <p><i class="fa fa-clock" aria-hidden="true"></i><span id="duration">Time</span></p>
-                            </div>
-                            <div>
-                                <button id="message-btn"><i class="fa fa-message" aria-hidden="true"></i></button>
-                            </div>
-                       </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+                    <div id="show-container" class="collapse-content">
+                     <!-- <div class="flex justify-between bg-white rounded-lg p-5">
+                        <p class="w-[260px]">10 Kids Unaware of Their Halloween Costume</p>
+                        <p><i class="fa fa-user mr-2" aria-hidden="true"></i><span id="user-view">view</span></p>
+                     </div> -->
+                  </div>
+            </section>
+        </section>
+        
     </main>
 
 
