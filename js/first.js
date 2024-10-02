@@ -4,7 +4,7 @@ const loadDiscussData = async (categoryName) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`);
     const data = await res.json();
     const posts = data.posts;
-   showDisplay(posts);
+    showDisplay(posts);
 }
 
 // display the posts data
@@ -41,7 +41,7 @@ const showDisplay = (posts) => {
                                 <p><i class="fa fa-clock mr-2" aria-hidden="true"></i><span id="duration">${post.posted_time}</span></p>
                             </div>
                             <div>
-                                <button onclick ="loadShowId()" id="message-btn"><i class="fa fa-message" aria-hidden="true"></i></button>
+                                <button onclick ="getIdData('${post.id}')" id="message-btn"><i class="fa fa-message" aria-hidden="true"></i></button>
                             </div>
                        </div>
                     </div>
@@ -50,7 +50,6 @@ const showDisplay = (posts) => {
     
         getPostContainer.appendChild(createPostCard) ;
     });
-
 };
 
 // get search field text
@@ -63,30 +62,32 @@ const searchFieldLoad = () => {
 }
 
 
-// // create a post id function for showing it another section
+// // // create a post id function for showing it another section
 
-const loadShowId = async (id) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?id=${id}`);
+const getIdData = async (id) => {
+    console.log(id);
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`);
     const data = await res.json();
-    const post = data.posts;
+    const post = data.posts.find((post) => post.id == id);
     showContainer(post);
 }
 
-// // create a show container
+// // // create a show container
 const showContainer = (post) => {
     console.log(post);
     const getShowContainer = document.getElementById('show-container');
     console.log(getShowContainer);
-    const createShowContainer = document.createElement('div');
-    createShowContainer.innerHTML = `<div class="flex justify-between bg-white rounded-lg p-5">
-                        <p class="w-[260px]">${post.category}</p>
-                        <p><i class="fa fa-user mr-2" aria-hidden="true"></i><span id="user-view"></span></p>
-                     </div>`
-                     
+        const createShowContainer = document.createElement('div');
+        createShowContainer.innerHTML = `<div class="flex justify-between bg-white rounded-lg p-5 mt-2 mb-3">
+         <p class="w-[260px]">${post.category}</p>
+        <p><i class="fa fa-user mr-2" aria-hidden="true"></i><span id="user-view">${post.view_count}</span></p>
+         </div>`
     getShowContainer.appendChild(createShowContainer);
-   
 }
+       
 
+
+   
 
 
 
